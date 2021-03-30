@@ -3,6 +3,7 @@ import { insertStudent } from "./../models/insertStudent";
 import { Request, Response } from "express";
 import { checkDate } from "../utilities/verifiers";
 import { selectStudentAgeById } from "../models/selectStudentAgeById";
+import { insertStudentInClass } from "../models/insertStudentInClass";
 
 class StudentController {
   async create(req: Request, res: Response) {
@@ -27,6 +28,21 @@ class StudentController {
       res.status(201).send({
         message: `Estudante ${name} adicionado a turma!`,
       });
+    } catch (error) {
+      res.status(errorCode).send({ message: error.message });
+    }
+  }
+
+  async execute(req: Request, res: Response) {
+    let errorCode: number = 400;
+    try {
+      const { class_id, student_id } = req.body;
+      if (!class_id || !student_id) {
+        errorCode = 422;
+        throw new Error("Preencha os campos do ID da class e do ID do aluno!");
+      }
+      await insertStudentInClass(class_id, student_id);
+      res.status(200).send({ message: "O aluno foi inserido na turma" });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
     }
