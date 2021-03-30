@@ -1,7 +1,8 @@
-export const insertClass = async():Promise<void> => {
-    try {
+import connection from "../database/connection";
 
-    } catch (error) {
-        
-    }
-}
+export const insertClass = async (): Promise<any> => {
+  try {
+  } catch (error) {
+    throw new Error(error.message || error.sqlMessage);
+  }
+};
