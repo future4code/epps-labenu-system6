@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { insertTeacher } from "../models/insertTeacher";
+import { insertTeacherInClass } from "../models/insertTeacherInClass";
 import { checkDate, formatDate } from "../utilities/verifiers";
 
 class TeacherController {
@@ -21,6 +22,23 @@ class TeacherController {
       const formatingDate = formatDate(birthdate);
       await insertTeacher(name, email, formatingDate, speciality);
       res.status(201).send({ message: "Docente criado com sucesso." });
+    } catch (error) {
+      res.status(errorCode).send({ message: error.message });
+    }
+  }
+
+  async execute(req: Request, res: Response) {
+    let errorCode: number = 400;
+    try {
+      const { class_id, teacher_id } = req.body;
+      if (!class_id || !teacher_id) {
+        errorCode = 422;
+        throw new Error(
+          "Preencha os campos do ID da class e do ID do docente para prosseguir."
+        );
+      }
+      (await insertTeacherInClass(class_id, teacher_id)) as string;
+      res.status(200).send({ message: "O professor foi inserido na turma" });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
     }
