@@ -11,6 +11,6 @@ const teacherController = new TeacherController();
 
 router.put("/create-class", classController.create);
 router.put("/create-student", studentController.create);
-router.put("/create-student", teacherController.create);
+router.put("/create-teacher", teacherController.create);
 
 export { router };
