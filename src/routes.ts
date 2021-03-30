@@ -12,5 +12,6 @@ const teacherController = new TeacherController();
 router.put("/create-class", classController.create);
 router.put("/create-student", studentController.create);
 router.put("/create-teacher", teacherController.create);
+router.post("/teacher-class", teacherController.execute);
 
 export { router };
