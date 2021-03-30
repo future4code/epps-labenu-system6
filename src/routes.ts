@@ -14,5 +14,6 @@ router.put("/create-student", studentController.create);
 router.put("/create-teacher", teacherController.create);
 router.get("/student/:id", studentController.show);
 router.post("/teacher-class", teacherController.execute);
+router.post("/student-class", studentController.execute);
 
 export { router };
