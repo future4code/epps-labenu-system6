@@ -13,12 +13,12 @@ const teacherController = new TeacherController();
 const getClassInfoController = new GetClassInfoController();
 const studentHobbyController = new StudentHobbyController();
 
-router.put("/create-class", classController.create);
+router.put("/class/create", classController.create);
+router.post("/class/update", classController.update);
 
-router.put("/create-student", studentController.create);
+router.put("/student/create", studentController.create);
 router.get("/students/:id", studentController.show);
-router.post("/teacher-class", teacherController.execute);
-router.post("/students-class", studentController.execute);
+router.post("/students/class", studentController.execute);
 router.get("/students/class/:id", getClassInfoController.show);
 router.get("/students", studentHobbyController.show);
 router.delete("/students/remove-class/:id", studentController.update);
@@ -27,6 +27,6 @@ router.delete("/students/remove-student/:id", studentController.delete);
 router.put("/teacher/create", teacherController.create);
 router.post("/teacher/class", teacherController.execute);
 router.get("/teacher/class/:id", teacherController.show);
-router.delete("/teacher/class/delete/:id", teacherController.update);
+router.delete("/teacher/class/remove/:id", teacherController.update);
 
 export { router };

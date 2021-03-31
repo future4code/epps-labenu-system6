@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { changeClassModule } from "../models/changeClassModule";
 import { insertClass } from "../models/insertClass";
 import { checkDate, formatDate } from "../utilities/verifiers";
 
@@ -31,6 +32,25 @@ class ClassController {
         type
       )) as string;
       res.status(201).send({ message: "Turma criada com sucesso." });
+    } catch (error) {
+      res.status(errorCode).send({ message: error.message });
+    }
+  }
+
+  async update(req: Request, res: Response) {
+    let errorCode: number = 404;
+    try {
+      const { id, module } = req.body;
+      if (!id || !module) {
+        errorCode = 422;
+        throw new Error(
+          "Preencha os campos do ID da turma e o número do módulo(1 a 7) para realizar a alteração."
+        );
+      }
+      (await changeClassModule(id, module)) as string;
+      res
+        .status(200)
+        .send({ message: "O módulo da turma foi alterado com sucesso!" });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
     }
