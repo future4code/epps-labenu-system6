@@ -9,7 +9,7 @@ const createTables = async (): Promise<void> => {
         start_date DATE NOT NULL,
         end_date DATE NOT NULL,
         module ENUM ('1', '2', '3', '4', '5', '6', '7', '0') DEFAULT "0",
-        type ENUM ("full-time class", "-na-night")
+        type ENUM ("Integral", "Noturna")
         );
       `);
     await connection.raw(`
