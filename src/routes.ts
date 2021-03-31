@@ -25,5 +25,6 @@ router.delete("/students/remove-class/:id", studentController.update);
 router.put("/teacher/create", teacherController.create);
 router.post("/teacher/class", teacherController.execute);
 router.get("/teacher/class/:id", teacherController.show);
+router.delete("/teacher/class/delete/:id", teacherController.update);
 
 export { router };
