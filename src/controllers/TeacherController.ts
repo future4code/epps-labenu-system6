@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { insertTeacher } from "../models/insertTeacher";
 import { insertTeacherInClass } from "../models/insertTeacherInClass";
+import { selectTeachersFromClass } from "../models/selectTeachersFromClass";
 import { checkDate, formatDate } from "../utilities/verifiers";
 
 class TeacherController {
@@ -39,6 +40,25 @@ class TeacherController {
       }
       (await insertTeacherInClass(class_id, teacher_id)) as string;
       res.status(200).send({ message: "O professor foi inserido na turma" });
+    } catch (error) {
+      res.status(errorCode).send({ message: error.message });
+    }
+  }
+
+  async show(req: Request, res: Response) {
+    let errorCode: number = 400;
+    try {
+      const { id } = req.params;
+      if (!id) {
+        errorCode = 404;
+        throw new Error("Insira um ID válido.");
+      }
+      const result = await selectTeachersFromClass(id);
+      if (!result.length) {
+        errorCode = 404;
+        throw new Error("Nenhum docente está na turma!");
+      }
+      res.status(200).send({ message: result });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
     }

@@ -12,11 +12,15 @@ const teacherController = new TeacherController();
 const getClassInfoController = new GetClassInfoController();
 
 router.put("/create-class", classController.create);
+
 router.put("/create-student", studentController.create);
-router.put("/create-teacher", teacherController.create);
 router.get("/students/:id", studentController.show);
 router.post("/teacher-class", teacherController.execute);
 router.post("/students-class", studentController.execute);
 router.get("/students/class/:id", getClassInfoController.show);
+
+router.put("/teacher/create", teacherController.create);
+router.post("/teacher/class", teacherController.execute);
+router.get("/teacher/class/:id", teacherController.show);
 
 export { router };
