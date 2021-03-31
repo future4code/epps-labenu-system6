@@ -24,5 +24,6 @@ router.get("/students", studentHobbyController.show);
 router.put("/teacher/create", teacherController.create);
 router.post("/teacher/class", teacherController.execute);
 router.get("/teacher/class/:id", teacherController.show);
+router.delete("/teacher/class/delete/:id", teacherController.update);
 
 export { router };

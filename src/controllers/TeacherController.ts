@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { insertTeacher } from "../models/insertTeacher";
 import { insertTeacherInClass } from "../models/insertTeacherInClass";
+import { removeTeacher } from "../models/removeTeacher";
 import { selectTeachersFromClass } from "../models/selectTeachersFromClass";
 import { checkDate, formatDate } from "../utilities/verifiers";
 
@@ -61,6 +62,23 @@ class TeacherController {
       res.status(200).send({ message: result });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
+    }
+  }
+
+  async update(req: Request, res: Response) {
+    let errorCode: number = 400;
+    try {
+      const { id } = req.params;
+      if (!id) {
+        errorCode = 404;
+        throw new Error(
+          "Insira um ID válido para a exclusão do professor da turma."
+        );
+      }
+      await removeTeacher(id);
+      res.status(200).send({ message: "O professor for removido da turma." });
+    } catch (error) {
+      res.status(error).send({ message: error.message });
     }
   }
 }
