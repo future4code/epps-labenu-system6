@@ -10,9 +10,15 @@ class ClassController {
       const { name, start_date, end_date, module, type } = req.body;
       const checkingStartDate = checkDate(start_date);
       const checkingEndDate = checkDate(end_date);
+      let editName = name;
+      if (type === "Noturna") {
+        editName = (name as string) + "-na-night";
+      }
       if (!name || !module || !type) {
         errorCode = 422;
-        throw new Error("Preencha corretamente os campos para a criação!");
+        throw new Error(
+          "Preencha corretamente os campos de name, start_date, end_date, module e type!"
+        );
       }
       if (!checkingStartDate) {
         errorCode = 406;
@@ -25,7 +31,7 @@ class ClassController {
       const convertStartDate = formatDate(start_date);
       const convertEndDate = formatDate(end_date);
       (await insertClass(
-        name,
+        editName,
         convertStartDate,
         convertEndDate,
         module,
