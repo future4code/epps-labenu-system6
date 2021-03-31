@@ -10,10 +10,13 @@ const studentController = new StudentController();
 const teacherController = new TeacherController();
 
 router.put("/create-class", classController.create);
+
 router.put("/create-student", studentController.create);
-router.put("/create-teacher", teacherController.create);
 router.get("/student/:id", studentController.show);
-router.post("/teacher-class", teacherController.execute);
 router.post("/student-class", studentController.execute);
+
+router.put("/teacher/create", teacherController.create);
+router.post("/teacher/class", teacherController.execute);
+router.get("/teacher/class/:id", teacherController.show);
 
 export { router };
