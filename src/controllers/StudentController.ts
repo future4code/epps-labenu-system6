@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import { checkDate } from "../utilities/verifiers";
 import { selectStudentAgeById } from "../models/selectStudentAgeById";
 import { insertStudentInClass } from "../models/insertStudentInClass";
+import { deleteStudent } from "../models/deleteStudent";
 
 class StudentController {
   async create(req: Request, res: Response) {
@@ -75,6 +76,21 @@ class StudentController {
       }
       await removeStudentFromClass(id);
       res.status(200).send({ message: "O aluno foi removido na turma" });
+    } catch (error) {
+      res.status(errorCode).send({ message: error.message });
+    }
+  }
+
+  async delete(req: Request, res: Response) {
+    let errorCode: number = 400;
+    try {
+      const id = req.params.id;
+      if (!id) {
+        errorCode = 422;
+        throw new Error("Informe o ID do estudante!");
+      }
+      await deleteStudent(id);
+      res.status(200).send({ message: "O aluno foi removido!" });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
     }
