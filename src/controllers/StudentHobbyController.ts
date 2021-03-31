@@ -14,7 +14,9 @@ class StudentHobbyController {
       const result = await selectStudentByHobby(hobby);
       if (!result.length) {
         errorCode = 404;
-        throw new Error("Não existe nenhum estudante relacionado a este hobby!");
+        throw new Error(
+          "Não existe nenhum estudante relacionado a este hobby!"
+        );
       }
       res.status(200).send({ message: result });
     } catch (error) {

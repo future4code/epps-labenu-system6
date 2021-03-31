@@ -3,13 +3,14 @@ import { insertTeacher } from "../models/insertTeacher";
 import { insertTeacherInClass } from "../models/insertTeacherInClass";
 import { removeTeacher } from "../models/removeTeacher";
 import { selectTeachersFromClass } from "../models/selectTeachersFromClass";
+import { Teacher } from "../types/teacher";
 import { checkDate, formatDate } from "../utilities/verifiers";
 
 class TeacherController {
   async create(req: Request, res: Response) {
     let errorCode: number = 400;
     try {
-      const { name, email, birthdate, speciality } = req.body;
+      const { name, email, birthdate, speciality } = req.body as Teacher;
       const checkingDate = checkDate(birthdate);
       if (!name || !email || !birthdate || !speciality) {
         errorCode = 422;
@@ -21,8 +22,8 @@ class TeacherController {
         errorCode = 406;
         throw new Error("Coloque uma data formato DD/MM/YYYY");
       }
-      const formatingDate = formatDate(birthdate);
-      await insertTeacher(name, email, formatingDate, speciality);
+      req.body.birthdate = formatDate(birthdate);
+      await insertTeacher(req.body);
       res.status(201).send({ message: "Docente criado com sucesso." });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });

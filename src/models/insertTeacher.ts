@@ -1,19 +1,15 @@
 import connection from "../database/connection";
+import { Teacher } from "../types/teacher";
 
-export const insertTeacher = async (
-  name: string,
-  email: string,
-  birthdate: string,
-  speciality: string
-): Promise<any> => {
+export const insertTeacher = async (teacher: Teacher): Promise<void> => {
   try {
     await connection
       .insert({
         id: Date.now(),
-        name,
-        email,
-        birthdate,
-        speciality,
+        name: teacher.name,
+        email: teacher.email,
+        birthdate: teacher.birthdate,
+        speciality: teacher.speciality,
       })
       .into("Teacher");
   } catch (error) {

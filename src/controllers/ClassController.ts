@@ -1,13 +1,20 @@
 import { Request, Response } from "express";
 import { changeClassModule } from "../models/changeClassModule";
 import { insertClass } from "../models/insertClass";
+import { ClassInfo } from "../types/class";
 import { checkDate, formatDate } from "../utilities/verifiers";
 
 class ClassController {
   async create(req: Request, res: Response) {
     let errorCode: number = 404;
     try {
-      const { name, start_date, end_date, module, type } = req.body;
+      const {
+        name,
+        start_date,
+        end_date,
+        module,
+        type,
+      } = req.body as ClassInfo;
       const checkingStartDate = checkDate(start_date);
       const checkingEndDate = checkDate(end_date);
       let editName = name;
@@ -28,15 +35,9 @@ class ClassController {
         errorCode = 406;
         throw new Error("Coloque a data final no formato DD/MM/YYYY");
       }
-      const convertStartDate = formatDate(start_date);
-      const convertEndDate = formatDate(end_date);
-      (await insertClass(
-        editName,
-        convertStartDate,
-        convertEndDate,
-        module,
-        type
-      )) as string;
+      req.body.start_date = formatDate(start_date);
+      req.body.end_date = formatDate(end_date);
+      await insertClass(req.body);
       res.status(201).send({ message: "Turma criada com sucesso." });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
