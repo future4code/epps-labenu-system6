@@ -10,7 +10,7 @@ const router = Router();
 const classController = new ClassController();
 const studentController = new StudentController();
 const teacherController = new TeacherController();
-const getClassInfoController = new ClassInfoController();
+const classInfoController = new ClassInfoController();
 const studentHobbyController = new StudentHobbyController();
 
 router.put("/class/create", classController.create);
@@ -19,7 +19,7 @@ router.post("/class/update", classController.update);
 router.put("/student/create", studentController.create);
 router.get("/students/:id", studentController.show);
 router.post("/students/class", studentController.execute);
-router.get("/students/class/:id", getClassInfoController.show);
+router.get("/students/class/:id", classInfoController.show);
 router.get("/students", studentHobbyController.show);
 router.delete("/students/remove-class/:id", studentController.update);
 router.delete("/students/remove-student/:id", studentController.delete);
