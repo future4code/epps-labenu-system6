@@ -1,3 +1,4 @@
+import { removeStudentFromClass } from "./../models/removeStudentFromClass";
 import { formatDate } from "./../utilities/verifiers";
 import { insertStudent } from "./../models/insertStudent";
 import { Request, Response } from "express";
@@ -60,6 +61,21 @@ class StudentController {
       res.status(200).send({ message: result });
     } catch (error) {
       console.log(error);
+      res.status(errorCode).send({ message: error.message });
+    }
+  }
+
+  async update(req: Request, res: Response) {
+    let errorCode: number = 400;
+    try {
+      const id = req.params.id;
+      if (!id) {
+        errorCode = 422;
+        throw new Error("Informe o ID do estudante!");
+      }
+      await removeStudentFromClass(id);
+      res.status(200).send({ message: "O aluno foi removido na turma" });
+    } catch (error) {
       res.status(errorCode).send({ message: error.message });
     }
   }

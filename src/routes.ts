@@ -20,6 +20,7 @@ router.post("/teacher-class", teacherController.execute);
 router.post("/students-class", studentController.execute);
 router.get("/students/class/:id", getClassInfoController.show);
 router.get("/students", studentHobbyController.show);
+router.delete("/students/remove-class/:id", studentController.update);
 
 router.put("/teacher/create", teacherController.create);
 router.post("/teacher/class", teacherController.execute);
