@@ -2,7 +2,7 @@ import { Router } from "express";
 import { ClassController } from "./controllers/ClassController";
 import { StudentController } from "./controllers/StudentController";
 import { TeacherController } from "./controllers/TeacherController";
-import { GetClassInfoController } from "./controllers/GetClassInfoController";
+import { ClassInfoController } from "./controllers/ClassInfoController";
 import { StudentHobbyController } from "./controllers/StudentHobbyController";
 
 const router = Router();
@@ -10,7 +10,7 @@ const router = Router();
 const classController = new ClassController();
 const studentController = new StudentController();
 const teacherController = new TeacherController();
-const getClassInfoController = new GetClassInfoController();
+const getClassInfoController = new ClassInfoController();
 const studentHobbyController = new StudentHobbyController();
 
 router.put("/class/create", classController.create);

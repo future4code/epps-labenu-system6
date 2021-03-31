@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { selectStudentByClass } from "../models/selectStudentByClass";
 
-class GetClassInfoController {
+class ClassInfoController {
   async show(req: Request, res: Response) {
     let errorCode: number = 400;
     try {
@@ -22,4 +22,4 @@ class GetClassInfoController {
   }
 }
 
-export { GetClassInfoController };
+export { ClassInfoController };

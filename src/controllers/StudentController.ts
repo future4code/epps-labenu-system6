@@ -6,12 +6,13 @@ import { checkDate } from "../utilities/verifiers";
 import { selectStudentAgeById } from "../models/selectStudentAgeById";
 import { insertStudentInClass } from "../models/insertStudentInClass";
 import { deleteStudent } from "../models/deleteStudent";
+import { Student } from "../types/student";
 
 class StudentController {
   async create(req: Request, res: Response) {
     let errorCode: number = 400;
     try {
-      const { name, email, birthdate, hobby } = req.body;
+      const { name, email, birthdate, hobby } = req.body as Student;
 
       if (!name || !email || !birthdate || !hobby) {
         errorCode = 422;
@@ -25,8 +26,8 @@ class StudentController {
         errorCode = 406;
         throw new Error("Coloque uma data formato DD/MM/YYYY");
       }
-      const formatingDate = formatDate(birthdate);
-      await insertStudent(name, email, formatingDate, hobby);
+      req.body.birthdate = formatDate(birthdate);
+      await insertStudent(req.body);
       res.status(201).send({
         message: `Estudante ${name} adicionado a turma!`,
       });
