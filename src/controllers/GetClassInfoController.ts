@@ -13,7 +13,7 @@ class GetClassInfoController {
       const result = await selectStudentByClass(id);
       if (!result.length) {
         errorCode = 404;
-        throw new Error("Nenhum docente está na turma!");
+        throw new Error("Nenhum estudante está na turma!");
       }
       res.status(200).send({ message: result });
     } catch (error) {
