@@ -76,9 +76,9 @@ class TeacherController {
         );
       }
       await removeTeacher(id);
-      res.status(200).send({ message: "O professor for removido da turma." });
+      res.status(200).send({ message: "O professor foi removido da turma." });
     } catch (error) {
-      res.status(error).send({ message: error.message });
+      res.status(errorCode).send({ message: error.message });
     }
   }
 }

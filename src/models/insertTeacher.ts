@@ -17,7 +17,6 @@ export const insertTeacher = async (
       })
       .into("Teacher");
   } catch (error) {
-    console.log(error.message || error.sqlMessage)
     throw new Error(error.message || error.sqlMessage);
   }
 };

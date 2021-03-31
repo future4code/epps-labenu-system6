@@ -75,7 +75,7 @@ class StudentController {
         throw new Error("Informe o ID do estudante!");
       }
       await removeStudentFromClass(id);
-      res.status(200).send({ message: "O aluno foi removido na turma" });
+      res.status(200).send({ message: "O aluno foi removido da turma" });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
     }
@@ -90,7 +90,7 @@ class StudentController {
         throw new Error("Informe o ID do estudante!");
       }
       await deleteStudent(id);
-      res.status(200).send({ message: "O aluno foi removido!" });
+      res.status(200).send({ message: "O aluno foi removido do sistema." });
     } catch (error) {
       res.status(errorCode).send({ message: error.message });
     }
