@@ -13,6 +13,7 @@ router.put("/create-class", classController.create);
 
 router.put("/create-student", studentController.create);
 router.get("/student/:id", studentController.show);
+router.post("/student-class", studentController.execute);
 
 router.put("/teacher/create", teacherController.create);
 router.post("/teacher/class", teacherController.execute);
