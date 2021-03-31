@@ -18,7 +18,7 @@
 ## 💻 Documentação
 Teste as rotas com a documentação, basta importar ela para seu postman.
 
-[Postman - LabenuSystem]()
+[Postman - LabenuSystem](https://documenter.getpostman.com/view/14145831/TzCMeTwk#a0cffc9e-31bf-48a6-94c5-573cdfa24464)
 
 ## ✨ Tecnologias
 Esse projeto foi desenvolvido com as seguintes tecnologias:
